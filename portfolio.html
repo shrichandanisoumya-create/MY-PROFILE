@@ -1,0 +1,1072 @@
+<!DOCTYPE html>
+<!-- fuck you , my friend -->
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Soumya Shrichandani — Designer & Developer</title>
+  <meta name="description" content="Portfolio of a designer and developer building thoughtful digital experiences." />
+
+  <!-- Fonts: DM Mono + Space Grotesk -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@300;400;500&family=Space+Grotesk:wght@400;500;600;700&display=swap"
+    rel="stylesheet">
+
+  <style>
+    /* ============================================================
+   COLORS — change these to re-theme the whole site
+   ============================================================ */
+    :root {
+      --bg: #faf8f2;
+      /* page background (warm white) */
+      --ink: #1c1c1c;
+      /* main black */
+      --yellow: #f5d90a;
+      /* accent yellow */
+      --muted: #6b6b6b;
+      /* grey text */
+      --card: #ffffff;
+      /* card background */
+    }
+
+    /* ============================================================
+   BASE
+   ============================================================ */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      background: var(--bg);
+      color: var(--ink);
+      font-family: "Space Grotesk", sans-serif;
+      /* faint grid background */
+      background-image:
+        linear-gradient(to right, rgba(28, 28, 28, .05) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(28, 28, 28, .05) 1px, transparent 1px);
+      background-size: 32px 32px;
+      overflow-x: hidden;
+    }
+
+    ::selection {
+      background: var(--yellow);
+      color: var(--ink);
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    img {
+      max-width: 100%;
+      display: block;
+    }
+
+    .mono {
+      font-family: "DM Mono", monospace;
+    }
+
+    .container {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+
+    @media (min-width: 768px) {
+      .container {
+        padding: 0 32px;
+      }
+    }
+
+    /* ============================================================
+   CUSTOM CURSOR (desktop only)
+   ============================================================ */
+    @media (pointer: fine) {
+
+      body,
+      a,
+      button,
+      [data-interactive] {
+        cursor: none !important;
+      }
+    }
+
+    .custom-cursor {
+      display: block;
+      position: fixed;
+      top: 0;
+      left: 0;
+      z-index: 99999;
+      pointer-events: none;
+      height: 40px;
+      width: 40px;
+      transform-origin: top left;
+      filter: drop-shadow(2px 3px 0 var(--bg));
+      will-change: transform;
+    }
+
+    /* ============================================================
+   HEADER / NAV
+   ============================================================ */
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 40;
+      border-bottom: 2px solid var(--ink);
+      background: rgba(250, 248, 242, .95);
+      backdrop-filter: blur(4px);
+    }
+
+    .header-inner {
+      height: 64px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-family: "DM Mono", monospace;
+      font-size: 12px;
+      font-weight: 700;
+      text-transform: uppercase;
+    }
+
+    .logo-badge {
+      width: 32px;
+      height: 32px;
+      flex-shrink: 0;
+      display: grid;
+      place-items: center;
+      background: var(--ink);
+      color: var(--bg);
+    }
+
+    nav.desktop-nav {
+      display: none;
+      gap: 32px;
+    }
+
+    nav.desktop-nav a {
+      font-family: "DM Mono", monospace;
+      font-size: 10px;
+      font-weight: 700;
+      text-transform: uppercase;
+      text-underline-offset: 4px;
+    }
+
+    nav.desktop-nav a:hover {
+      text-decoration: underline;
+    }
+
+    @media (min-width: 768px) {
+      nav.desktop-nav {
+        display: flex;
+      }
+
+      .menu-btn {
+        display: none !important;
+      }
+    }
+
+    .menu-btn {
+      background: none;
+      border: 2px solid var(--ink);
+      width: 40px;
+      height: 40px;
+      font-size: 18px;
+      display: grid;
+      place-items: center;
+    }
+
+    /* Mobile menu overlay */
+    .mobile-menu {
+      position: fixed;
+      inset: 0;
+      z-index: 60;
+      background: var(--bg);
+      border-left: 2px solid var(--ink);
+      transform: translateX(100%);
+      transition: transform .3s ease;
+      display: flex;
+      flex-direction: column;
+      padding: 24px;
+    }
+
+    .mobile-menu.open {
+      transform: translateX(0);
+    }
+
+    .mobile-menu a {
+      border-top: 2px solid var(--ink);
+      padding: 24px 0;
+      font-size: 28px;
+      font-weight: 700;
+      text-transform: uppercase;
+    }
+
+    .mobile-menu .close-btn {
+      align-self: flex-end;
+      background: none;
+      border: 2px solid var(--ink);
+      width: 40px;
+      height: 40px;
+      font-size: 18px;
+    }
+
+    /* ============================================================
+   BUTTONS
+   ============================================================ */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 14px 28px;
+      font-family: "DM Mono", monospace;
+      font-size: 12px;
+      font-weight: 700;
+      text-transform: uppercase;
+      border: 2px solid var(--ink);
+      transition: transform .2s ease, box-shadow .2s ease;
+    }
+
+    .btn:hover {
+      transform: translate(-2px, -2px);
+    }
+
+    .btn-ink {
+      background: var(--ink);
+      color: var(--bg);
+      box-shadow: 5px 5px 0 var(--yellow);
+    }
+
+    .btn-ink:hover {
+      box-shadow: 8px 8px 0 var(--yellow);
+    }
+
+    .btn-yellow {
+      background: var(--yellow);
+      color: var(--ink);
+      box-shadow: 5px 5px 0 var(--ink);
+    }
+
+    .btn-yellow:hover {
+      box-shadow: 8px 8px 0 var(--ink);
+    }
+
+    /* ============================================================
+   HERO
+   ============================================================ */
+    .hero {
+      position: relative;
+      min-height: min(760px, calc(100svh - 64px));
+      display: grid;
+      align-items: center;
+      gap: 40px;
+      padding: 56px 0;
+    }
+
+    @media (min-width: 768px) {
+      .hero {
+        grid-template-columns: 1fr 1fr;
+        gap: 50px;
+        padding: 64px 0;
+      }
+    }
+
+    .hero-corner {
+      position: absolute;
+      top: 24px;
+      font-family: "DM Mono", monospace;
+      font-size: 10px;
+      text-transform: uppercase;
+      color: var(--muted);
+      display: none;
+    }
+
+    @media (min-width: 768px) {
+      .hero-corner {
+        display: block;
+      }
+    }
+
+    .hero-corner.left {
+      left: 0;
+    }
+
+    .hero-corner.right {
+      right: 0;
+    }
+
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      border: 1px solid var(--ink);
+      background: var(--yellow);
+      padding: 6px 12px;
+      margin-bottom: 20px;
+      font-family: "DM Mono", monospace;
+      font-size: 10px;
+      font-weight: 700;
+      text-transform: uppercase;
+    }
+
+    .hero-badge .dot {
+      width: 8px;
+      height: 8px;
+      background: var(--ink);
+    }
+
+    /* LEFT SIDE FONT - SLIGHTLY REDUCED TO SAVE SPACE */
+    h1.hero-title {
+      font-size: clamp(40px, 6.5vw, 92px);
+      font-weight: 700;
+      line-height: .9;
+      text-transform: uppercase;
+    }
+
+    .text-outline {
+      color: transparent;
+      -webkit-text-stroke: 1.5px var(--ink);
+    }
+
+    .hero-dot {
+      color: var(--yellow);
+      -webkit-text-stroke: 1.5px var(--ink);
+    }
+
+    .hero-sub {
+      margin-top: 20px;
+      max-width: 500px;
+      font-family: "DM Mono", monospace;
+      font-size: 13px;
+      line-height: 1.7;
+      color: var(--muted);
+    }
+
+    .hero-cta {
+      margin-top: 28px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+
+    /* Portrait card — STRICTLY PROPORTIONED & SIGNIFICANTLY LARGER */
+    .portrait-inner img {
+  filter: contrast(1.08) brightness(1.02) saturate(1.05);
+}
+    .portrait {
+      position: relative;
+      margin: 0 auto;
+      aspect-ratio: 4 / 5;
+      width: 100%;
+      max-width: 520px; /* Badi width */
+      border: 2px solid var(--ink);
+      background: #f0eee7;
+      box-shadow: 10px 10px 0 var(--ink);
+      transition: transform .3s ease, box-shadow .3s ease;
+      overflow: visible; /* Keeps corners/tags intact */
+    }
+
+    @media (min-width: 1024px) {
+      .portrait {
+        max-width: 580px; /* Ekdum Badi photo on desktop */
+      }
+    }
+
+    .portrait:hover {
+      transform: translateY(-8px) rotate(1deg);
+      box-shadow: 16px 16px 0 var(--yellow);
+    }
+
+    .portrait-inner {
+      position: absolute;
+      inset: 16px;
+      display: block;
+      border: 2px dashed rgba(28, 28, 28, .4);
+      overflow: hidden;
+    }
+
+    .portrait-inner img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center;
+    }
+
+    .portrait-tag1 {
+      position: absolute;
+      top: -12px;
+      right: -12px;
+      width: 32px;
+      height: 32px;
+      border: 2px solid var(--ink);
+      background: var(--yellow);
+      z-index: 5;
+    }
+
+    .portrait-tag2 {
+      position: absolute;
+      bottom: -12px;
+      left: -12px;
+      border: 2px solid var(--ink);
+      background: var(--bg);
+      padding: 8px 12px;
+      font-family: "DM Mono", monospace;
+      font-size: 9px;
+      font-weight: 700;
+      text-transform: uppercase;
+      z-index: 5;
+    }
+
+    /* ============================================================
+   TICKER
+   ============================================================ */
+    .ticker {
+      border-top: 2px solid var(--ink);
+      border-bottom: 2px solid var(--ink);
+      background: var(--yellow);
+      padding: 12px 0;
+      overflow: hidden;
+    }
+
+    .ticker-track {
+      display: flex;
+      width: max-content;
+      white-space: nowrap;
+      font-family: "DM Mono", monospace;
+      font-size: 12px;
+      font-weight: 700;
+      text-transform: uppercase;
+      animation: ticker 20s linear infinite;
+    }
+
+    @keyframes ticker {
+      from {
+        transform: translateX(0);
+      }
+
+      to {
+        transform: translateX(-50%);
+      }
+    }
+
+    /* ============================================================
+   SECTIONS
+   ============================================================ */
+    section {
+      padding: 80px 0;
+      scroll-margin-top: 96px;
+    }
+
+    .section-heading {
+      margin-bottom: 28px;
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      gap: 16px;
+      border-bottom: 2px solid var(--ink);
+      padding-bottom: 12px;
+    }
+
+    .section-heading .eyebrow {
+      font-family: "DM Mono", monospace;
+      font-size: 10px;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 4px;
+    }
+
+    .section-heading h2 {
+      font-size: 28px;
+      font-weight: 700;
+      text-transform: uppercase;
+    }
+
+    @media (min-width: 768px) {
+      .section-heading h2 {
+        font-size: 36px;
+      }
+    }
+
+    .section-heading .arrow {
+      font-size: 24px;
+    }
+
+    /* About */
+    .about-grid {
+      display: grid;
+      gap: 32px;
+    }
+
+    @media (min-width: 768px) {
+      .about-grid {
+        grid-template-columns: 2fr 1fr;
+      }
+    }
+
+    .about-lead {
+      font-size: 28px;
+      font-weight: 600;
+      line-height: 1.2;
+    }
+
+    @media (min-width: 768px) {
+      .about-lead {
+        font-size: 44px;
+      }
+    }
+
+    .about-lead .hl {
+      background: var(--yellow);
+      padding: 0 8px;
+    }
+
+    .about-copy {
+      font-family: "DM Mono", monospace;
+      font-size: 12px;
+      line-height: 1.8;
+      color: var(--muted);
+    }
+
+    .stats {
+      margin-top: 28px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      border: 2px solid var(--ink);
+    }
+
+    .stats>div {
+      padding: 16px;
+    }
+
+    .stats>div+div {
+      border-left: 2px solid var(--ink);
+    }
+
+    .stats strong {
+      display: block;
+      font-size: 24px;
+    }
+
+    .stats span {
+      font-family: "DM Mono", monospace;
+      font-size: 9px;
+      text-transform: uppercase;
+    }
+
+    /* Work cards */
+    .work-grid {
+      display: grid;
+      gap: 20px;
+    }
+
+    @media (min-width: 768px) {
+      .work-grid {
+        grid-template-columns: repeat(3, 1fr);
+      }
+    }
+
+    .work-card {
+      display: flex;
+      flex-direction: column;
+      min-height: 320px;
+      border: 2px solid var(--ink);
+      background: var(--card);
+      padding: 24px;
+      box-shadow: 5px 5px 0 var(--ink);
+      transition: transform .3s ease, background .3s ease, color .3s ease, box-shadow .3s ease;
+    }
+
+    .work-card:hover {
+      transform: translateY(-12px);
+      background: var(--ink);
+      color: var(--bg);
+      box-shadow: 10px 10px 0 var(--yellow);
+    }
+
+    .work-card .top {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+    }
+
+    .work-card .num {
+      font-family: "DM Mono", monospace;
+      font-size: 12px;
+    }
+
+    .work-card .icon {
+      font-size: 32px;
+      transition: transform .3s ease;
+    }
+
+    .work-card:hover .icon {
+      transform: scale(1.25) rotate(6deg);
+    }
+
+    .work-card .body {
+      margin-top: auto;
+    }
+
+    .work-card .type {
+      font-family: "DM Mono", monospace;
+      font-size: 10px;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 12px;
+    }
+
+    .work-card:hover .type,
+    .work-card:hover .copy {
+      color: rgba(250, 248, 242, .7);
+    }
+
+    .work-card h3 {
+      font-size: 28px;
+      font-weight: 700;
+      text-transform: uppercase;
+    }
+
+    .work-card .copy {
+      margin-top: 16px;
+      font-size: 14px;
+      line-height: 1.6;
+      color: var(--muted);
+    }
+
+    .work-card .link {
+      margin-top: 24px;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      border-bottom: 1px solid currentColor;
+      padding-bottom: 4px;
+      font-family: "DM Mono", monospace;
+      font-size: 10px;
+      font-weight: 700;
+      text-transform: uppercase;
+    }
+
+    /* Experience */
+    .exp-list {
+      border-top: 2px solid var(--ink);
+    }
+
+    .exp-row {
+      display: grid;
+      gap: 8px;
+      border-bottom: 2px solid var(--ink);
+      padding: 24px 0;
+      transition: background .3s ease, color .3s ease, padding .3s ease;
+    }
+
+    .exp-row:hover {
+      background: var(--ink);
+      color: var(--bg);
+      padding-left: 20px;
+      padding-right: 20px;
+    }
+
+    @media (min-width: 768px) {
+      .exp-row {
+        grid-template-columns: 1fr 2fr 1fr;
+        align-items: center;
+      }
+
+      .exp-row .place {
+        text-align: right;
+      }
+    }
+
+    .exp-row .year,
+    .exp-row .place {
+      font-family: "DM Mono", monospace;
+      font-size: 12px;
+    }
+
+    .exp-row h3 {
+      font-size: 24px;
+      font-weight: 700;
+      text-transform: uppercase;
+    }
+
+    @media (min-width: 768px) {
+      .exp-row h3 {
+        font-size: 30px;
+      }
+    }
+
+    /* Contact */
+    .contact {
+      margin: 80px 0;
+      border: 2px solid var(--ink);
+      background: var(--ink);
+      color: var(--bg);
+      text-align: center;
+      padding: 64px 24px;
+      box-shadow: 10px 10px 0 var(--yellow);
+    }
+
+    @media (min-width: 768px) {
+      .contact {
+        padding: 64px 48px;
+      }
+    }
+
+    .contact .eyebrow {
+      font-family: "DM Mono", monospace;
+      font-size: 10px;
+      text-transform: uppercase;
+      color: var(--yellow);
+    }
+
+    .contact h2 {
+      margin: 20px auto 0;
+      max-width: 900px;
+      font-size: 36px;
+      font-weight: 700;
+      text-transform: uppercase;
+    }
+
+    @media (min-width: 640px) {
+      .contact h2 {
+        font-size: 56px;
+      }
+    }
+
+    .contact .btn {
+      margin-top: 32px;
+    }
+
+    /* ============================================================
+   FOOTER
+   ============================================================ */
+    footer {
+      border-top: 2px solid var(--ink);
+      background: var(--bg);
+    }
+
+    .footer-inner {
+      display: grid;
+      gap: 32px;
+      padding: 40px 0;
+    }
+
+    @media (min-width: 768px) {
+      .footer-inner {
+        grid-template-columns: 1fr auto;
+        align-items: center;
+      }
+    }
+
+    .footer-inner .name {
+      font-family: "DM Mono", monospace;
+      font-size: 12px;
+      font-weight: 700;
+      text-transform: uppercase;
+    }
+
+    .footer-inner .tag {
+      margin-top: 8px;
+      font-size: 14px;
+      color: var(--muted);
+    }
+
+    .socials {
+      display: flex;
+      gap: 12px;
+    }
+
+    .socials a {
+      width: 40px;
+      height: 40px;
+      display: grid;
+      place-items: center;
+      border: 2px solid var(--ink);
+      transition: background .2s ease, transform .2s ease;
+    }
+
+    .socials a:hover {
+      background: var(--yellow);
+      transform: translateY(-3px);
+    }
+
+    /* Fade-in animation */
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+
+      to {
+        opacity: 1;
+        transform: none;
+      }
+    }
+
+    .fade-in {
+      animation: fadeIn .8s ease both;
+    }
+
+    /* Reduced motion */
+    @media (prefers-reduced-motion: reduce) {
+
+      *,
+      *::before,
+      *::after {
+        scroll-behavior: auto !important;
+        transition-duration: .01ms !important;
+        animation-duration: .01ms !important;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- Custom cursor (yellow arrow drawn as inline SVG) -->
+  <svg class="custom-cursor" id="cursor" viewBox="0 0 32 32" width="40" height="40" fill="none" xmlns="http://www.w3.org/2000/svg"
+    aria-hidden="true">
+    <path d="M6 3 L26 16 L16 18 L12 28 Z" fill="#f5d90a" stroke="#1c1c1c" stroke-width="2" stroke-linejoin="round" />
+  </svg>
+
+  <!-- ================= HEADER ================= -->
+  <header>
+    <div class="container header-inner">
+      <a href="#top" class="logo">
+        <span class="logo-badge">S</span>
+        <span>Soumya Shrichandani</span>
+      </a>
+      <nav class="desktop-nav">
+        <a href="#about">About</a>
+        <a href="#work">Work</a>
+        <a href="#experience">Experience</a>
+        <a href="#contact">Contact</a>
+      </nav>
+      <button class="menu-btn" id="menuOpen" aria-label="Open menu">☰</button>
+    </div>
+  </header>
+
+  <!-- Mobile menu -->
+  <div class="mobile-menu" id="mobileMenu">
+    <button class="close-btn" id="menuClose" aria-label="Close menu">✕</button>
+    <a href="#about">01 / About</a>
+    <a href="#work">02 / Work</a>
+    <a href="#experience">03 / Experience</a>
+    <a href="#contact">04 / Contact</a>
+  </div>
+
+  <main id="top" class="container">
+
+    <!-- ================= HERO ================= -->
+    <section class="hero">
+      <span class="hero-corner left">Portfolio / 2026</span>
+      <span class="hero-corner right">Scroll to explore ↓</span>
+
+      <div class="fade-in">
+        <p class="hero-badge"><span class="dot"></span> My Profile </p>
+        <h1 class="hero-title">Soumya<br><span class="text-outline">Shrichandani</span><span class="hero-dot">.</span></h1>
+        <p class="hero-sub">Designer and developer creating precise, expressive digital experiences from first idea to
+          final interaction.</p>
+        <div class="hero-cta">
+          <a href="#work" class="btn btn-ink">View my work →</a>
+          <a href="#contact" class="btn btn-yellow">Start a project ✉</a>
+        </div>
+      </div>
+
+      <!-- Updated BADI Portrait & Fixed Borders -->
+      <div class="portrait" data-interactive>
+        <div class="portrait-inner">
+          <img src="Detailed Graphite Portrait of a Young Man.png" alt="Soumya Shrichandani">
+        </div>
+        <span class="portrait-tag1"></span>
+        <span class="portrait-tag2">Designer / Developer</span>
+      </div>
+    </section>
+
+    <!-- ================= TICKER ================= -->
+    <div class="ticker" aria-hidden="true" style="margin-left:calc(50% - 50vw); margin-right:calc(50% - 50vw);">
+      <div class="ticker-track">
+        <span>Design · Development · Direction · Interaction · Strategy ·&nbsp;</span>
+        <span>Design · Development · Direction · Interaction · Strategy ·&nbsp;</span>
+        <span>Design · Development · Direction · Interaction · Strategy ·&nbsp;</span>
+        <span>Design · Development · Direction · Interaction · Strategy ·&nbsp;</span>
+      </div>
+    </div>
+
+    <!-- ================= ABOUT ================= -->
+    <section id="about">
+      <div class="section-heading">
+        <div>
+          <p class="eyebrow">01 / Introduction</p>
+          <h2>About me</h2>
+        </div>
+        <span class="arrow">↘</span>
+      </div>
+      <div class="about-grid">
+        <p class="about-lead">I don't just learn how things work, <span class="hl">I explore how to make them work better.</span></p>
+        <div>
+          <p class="about-copy">I'm Soumya Shrichandani — a student, aspiring engineer, and creator driven by curiosity.
+
+From programming and Linux to engineering concepts and digital experiences, I enjoy understanding systems, solving problems, and building things from the ground up.
+
+Currently focused on strengthening my foundations in computer science and engineering, while turning what I learn into projects that matter.
+
+For me, learning isn't just about knowing more. It's about building more.
+</p>
+          <div class="stats">
+            <div><strong>02+</strong><span>Years creating</span></div>
+            <div><strong>Counting</strong><span>Projects shipped</span></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= WORK ================= -->
+    <section id="work">
+      <div class="section-heading">
+        <div>
+          <p class="eyebrow">02 / Selected work</p>
+          <h2>Things I've made</h2>
+        </div>
+        <span class="arrow">↘</span>
+      </div>
+      <div class="work-grid">
+
+        <article class="work-card" data-interactive>
+          <div class="top"><span class="num">/01</span><span class="icon">⌘</span></div>
+          <div class="body">
+            <p class="type">Smart Traffic Management · Hackathon Project</p>
+            <h3>TrafficX</h3>
+            <p class="copy">A concept for real-time traffic management focused on improving urban mobility through intelligent monitoring and coordinated traffic systems.</p>
+            <a href="https://venerable-sunshine-ba6451.netlify.app" class="link">View full project ↗</a>
+          </div>
+        </article>
+
+        <article class="work-card" data-interactive>
+          <div class="top"><span class="num">/02</span><span class="icon">✦</span></div>
+          <div class="body">
+            <p class="type">Identity · Web design</p>
+            <h3>Project Beta</h3>
+            <p class="copy">A bold identity system translated into an editorial, responsive web experience.</p>
+            <a href="#contact" class="link">View case study ↗</a>
+          </div>
+        </article>
+
+        <article class="work-card" data-interactive>
+          <div class="top"><span class="num">/03</span><span class="icon">◼</span></div>
+          <div class="body">
+            <p class="type">Creative direction</p>
+            <h3>Project Gamma</h3>
+            <p class="copy">A flexible visual language joining strong typography with purposeful interaction.</p>
+            <a href="#contact" class="link">View case study ↗</a>
+          </div>
+        </article>
+
+      </div>
+    </section>
+
+    <!-- ================= EXPERIENCE ================= -->
+    <section id="experience">
+      <div class="section-heading">
+        <div>
+          <p class="eyebrow">03 / Timeline</p>
+          <h2>Experience</h2>
+        </div>
+        <span class="arrow">↘</span>
+      </div>
+      <div class="exp-list">
+        <div class="exp-row" data-interactive>
+          <span class="year">2025-now</span>
+          <h3>Independent Developer</h3>
+          <span class="place">Soumya create</span>
+        </div>
+        <div class="exp-row" data-interactive>
+          <span class="year">2026</span>
+          <h3>Ethical Hacker(kali linux)</h3>
+          <span class="place">kali linux</span>
+        </div>
+        <div class="exp-row" data-interactive>
+          <span class="year">2025</span>
+          <h3>student &amp; Developer</h3>
+          <span class="place">Independent</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= CONTACT ================= -->
+    <section id="contact" class="contact">
+      <p class="eyebrow">Have something in mind?</p>
+      <h2>Let's make something remarkable.</h2>
+      <a href="mailto:shrichandanisoumya@gmail.com" class="btn btn-yellow">shrichandanisoumya@gmail.com →</a>
+    </section>
+
+  </main>
+
+  <!-- ================= FOOTER ================= -->
+  <footer>
+    <div class="container footer-inner">
+      <div>
+        <p class="name">Soumya Shrichandani © 2026</p>
+        <p class="tag">Designed with intention. Built with care.</p>
+      </div>
+      <div class="socials">
+        <a href="https://github.com/shrichandanisoumya-create/soumya.git" aria-label="GitHub">GH</a>
+        <a href="https://www.linkedin.com/in/soumya-shrichandani-a71089429/" aria-label="LinkedIn">IN</a>
+        <a href="mailto:shrichandanisoumya@gmail.com" aria-label="Email">✉</a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    /* ============================================================
+        CUSTOM CURSOR — follows the mouse, grows over links/buttons
+        ============================================================ */
+    (function () {
+      const cursor = document.getElementById("cursor");
+      let x = -100, y = -100, active = false;
+
+      window.addEventListener("mousemove", (e) => { x = e.clientX; y = e.clientY; });
+      document.addEventListener("mouseover", (e) => {
+        active = Boolean(e.target.closest("a, button, [data-interactive]"));
+      });
+
+      function render() {
+        const scale = active ? " scale(1.45) rotate(-8deg)" : " scale(1)";
+        cursor.style.transform = `translate3d(${x - 3}px, ${y - 2}px, 0)` + scale;
+        requestAnimationFrame(render);
+      }
+      requestAnimationFrame(render);
+    })();
+
+    /* ============================================================
+        MOBILE MENU
+        ============================================================ */
+    (function () {
+      const menu = document.getElementById("mobileMenu");
+      document.getElementById("menuOpen").addEventListener("click", () => menu.classList.add("open"));
+      document.getElementById("menuClose").addEventListener("click", () => menu.classList.remove("open"));
+      menu.querySelectorAll("a").forEach((a) =>
+        a.addEventListener("click", () => menu.classList.remove("open"))
+      );
+    })();
+    console.log('fuck you,my friend')
+  </script>
+
+</body>
+
+</html>
